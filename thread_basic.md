@@ -11,7 +11,7 @@ variables at any given time,for detailed theory on Thread [click here](https://e
 
 **In simple words it is a path of execution within a process ..**
 
-###### MULTITHREADING
+##### MULTITHREADING
 ---
 
 Its main idea is to achieving the idea of parallelism , it divides a work
@@ -141,7 +141,7 @@ In Main function, executed before the function ends...
 ```
 join() function waits for the function to end then moves to the main function
 
-###### MULTITHREADING
+##### MULTITHREADING
 ---
 
 ```python
@@ -186,6 +186,119 @@ time taken: 3.0047194957733154
 all live threads finished job
 
 ```
+
+##### DAEMON THREADS
+---
+
+>In simple words daemon threads stops execution of the program if the execution of main thread is complete.
+
+```python
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+import threading
+import time
+
+count = 5
+
+def func1():
+    global count
+    while True:
+        if count == 1000:
+            break
+        print ('count : {}'.format(count))
+        count+=1
+        time.sleep(2)
+
+def func2():
+    global count
+    for i in range(1,10):
+        count+=i
+        time.sleep(1)
+
+t1 = threading.Thread(target = func1, name = 'Thread1')
+t2 = threading.Thread(target = func2, name = 'Thread2')
+
+t1.start()
+t2.start()
+
+t2.join()
+
+print ("End value of count: {}".format(count))
+
+```
+
+<code>OUTPUT</code>
+```
+count : 5
+count : 9
+count : 17
+count : 29
+count : 45
+End value of count: 55
+count : 55
+count : 56
+count : 57
+^Z
+[2]+  Stopped                 ./thread_daemon.py
+```
+
+---
+
+The "End value of count" message executed but then also the execution is going on..
+If we declare the t1 thread as daemon thread the execution will be stopped
+when the main thread has finished execution..
+
+---
+
+**NOTE:By Default all thread are set to daemon = false**
+
+```python
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+import threading
+import time
+
+count = 5
+
+def func1():
+    global count
+    while True:
+        if count == 1000:
+            break
+        print ('count : {}'.format(count))
+        count+=1
+        time.sleep(2)
+
+def func2():
+    global count
+    for i in range(1,10):
+        count+=i
+        time.sleep(1)
+
+t1 = threading.Thread(target = func1, name = 'Thread1', daemon = True)
+t2 = threading.Thread(target = func2, name = 'Thread2')
+
+t1.start()
+t2.start()
+
+t2.join()
+
+print ("End value of count: {}".format(count))
+
+```
+<code>OUTPUT</code>
+
+```
+count : 5
+count : 9
+count : 17
+count : 29
+count : 45
+End value of count: 55
+```
+
 Author - [Kakí_epíthesi](https://github.com/kaki-epithesi)
 
 [ALL CODES](https://github.com/kaki-epithesi/Python-Threads) 

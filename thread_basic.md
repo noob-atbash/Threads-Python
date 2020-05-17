@@ -17,10 +17,10 @@ variables at any given time,for detailed theory on Thread [click here](https://e
 Its main idea is to achieving the idea of parallelism , it divides a work
 into many threads for the different parts of the work .Let the work has 5 parts, so the work will be divided between 5 threads for faster work.Threads do not execute parallelly, they just switch between one another.
 
->LET UNDERSTAND THREADS WITH THE HELP OF PYTHON
+>LET UNDERSTAND THREADS WITH THE HELP OF PYTHON 
 
 Thread class comes in threading module in python,please read the
-[official documenration](https://docs.python.org/2/library/thread.html) to grasp some concepts.
+[official documenration](https://docs.python.org/2/library/thread.html) to grasp some concepts and also checkout the github repo  of [threading module](https://github.com/python/cpython/blob/master/Lib/threading.py) and [Thread Class](https://github.com/python/cpython/blob/master/Lib/threading.py#L766)
 
 ---
 
